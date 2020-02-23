@@ -1,17 +1,19 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 
 function TreeComponent(props) {
 
+    //state
     let [expanded, setExpanded] = useState(false)
     const children = props.data.children
     const name = props.data.name
+    const depth = props.depth || 1
 
+    //observers
     useEffect(() => {
         setExpanded(props.forceExpanded)
     }, [props.forceExpanded])
 
-    let depth = props.depth || 1
-
+    //render
     return (
         <div>
             <div className="node"
@@ -39,8 +41,11 @@ function TreeComponent(props) {
 
 
 const SymbolSpan = (props) => {
-    let symbol = props.expanded ? '\u25BC' : '\u2BC8'
-    if (!props.children) {
+    let symbol
+
+    if (props.children) {
+        symbol = props.expanded ? '\u25BC' : '\u2BC8'
+    } else {
         symbol = '\u2802 '
     }
     return <span> {symbol} </span>
