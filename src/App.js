@@ -40,6 +40,31 @@ const data = {
                     name: 'Mamma Mia.avi'
                 },
             ]
+        },
+        {
+            name: 'series',
+            children: [
+                {
+                    name: 'Gossip Girl.avi'
+                },
+                {
+                    name: 'Narcos.avi'
+                },
+                {
+                    name: 'Game of Thrones.avi'
+                },
+                {
+                    name: 'Favourites',
+                    children : [
+                        {
+                            name : 'Stranger Things.avi'
+                        },
+                        {
+                            name : 'La Casa De Papel.avi'
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
@@ -50,7 +75,7 @@ function App() {
 
     return (
         <div className="App">
-            <button onClick={() => {setforceExpanded(true)}}> Click </button>
+            <button className="btn" onClick={() => {setforceExpanded(!forceExpanded)}}> { forceExpanded ? 'Colapse All' : 'Expand All'} </button>
             <TreeComponent forceExpanded={forceExpanded} data={data}/>
         </div>
     );

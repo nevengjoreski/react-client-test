@@ -2,6 +2,10 @@
   text-align: left;
 }
 
+.btn {
+  margin: 20px 30px
+}
+
 body{
   background: #333;
   color:white;

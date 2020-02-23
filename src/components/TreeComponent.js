@@ -1,58 +1,46 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 
-class TreeComponent extends Component {
+function TreeComponent(props) {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            ...this.props.data,
-            expanded : false
-        }
+    let [expanded, setExpanded] = useState(false)
+    const children = props.data.children
+    const name = props.data.name
 
-        this.state.depth = (this.state.depth === undefined) ? 1 : this.state.depth
-    }
+    useEffect(() => {
+        setExpanded(props.forceExpanded)
+    }, [props.forceExpanded])
 
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-    }
+    let depth = props.depth || 1
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.forceExpanded === true && this.state.expanded !== true){
-            console.log(1)
-            this.setState({expanded : true})
-        }
-    }
-
-    render() {
-        return (
-            <div>
-                <div className="node"
-                    style={{marginLeft: this.state.depth * 30}}
-                    onClick={ () => this.setState({expanded : !this.state.expanded})}
-                >
-                    <div>
-                        <SymbolSpan expanded={this.state.expanded} children={this.state.children} />
-                        {this.state.name}
-                    </div>
+    return (
+        <div>
+            <div className="node"
+                style={{marginLeft: depth * 30}}
+                onClick={() => setExpanded(!expanded)}
+            >
+                <div>
+                    <SymbolSpan expanded={expanded} children={children}/> {name}
                 </div>
-
-                {
-                    this.state.children
-                    && this.state.children.length > 0
-                    && this.state.expanded
-                    && this.state.children.map((v, i) => {
-                        v.depth = this.state.depth + 1
-                        return <TreeComponent forceExpanded={this.props.forceExpanded} key={i} data={v} expanded={this.state.expanded}/>
-                    })
-                }
-
             </div>
-        );
-    }
+
+            {
+                children
+                && children.length > 0
+                && expanded
+                && children.map((v, i) => {
+                    return <TreeComponent depth={depth + 1} key={i} data={v}
+                        expanded={expanded} forceExpanded={props.forceExpanded}/>
+                })
+            }
+
+        </div>
+    );
 }
+
 
 const SymbolSpan = (props) => {
     let symbol = props.expanded ? '\u25BC' : '\u2BC8'
-    if( !props.children ){
+    if (!props.children) {
         symbol = '\u2802 '
     }
     return <span> {symbol} </span>
