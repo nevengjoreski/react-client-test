@@ -2,22 +2,28 @@ import React, {Component} from 'react';
 
 class TreeComponent extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            ...this.props.data
+        }
+
+        this.state.depth = (this.state.depth === undefined) ? 1 : this.state.depth
+    }
 
     render() {
-        const {name, children} = this.props.data;
-        let depth =  this.props.depth ?? 1
-
         return (
             <div>
                 {/*{JSON.stringify(root)}*/}
-                <div className="node" style={{marginLeft : depth * 30 }}>
-                    <div>{name}</div>
+                <div className="node" style={{marginLeft: this.state.depth * 30}}>
+                    <div>{this.state.name}</div>
                 </div>
 
-                {children && children.length > 0 &&
-                    children.map((v, i) => {
-                        return <TreeComponent depth={depth + 1} key={i} data={v}/>
-                    })
+                {this.state.children && this.state.children.length > 0 &&
+                this.state.children.map((v, i) => {
+                    v.depth = this.state.depth + 1
+                    return <TreeComponent key={i} data={v}/>
+                })
                 }
 
             </div>
