@@ -46,9 +46,12 @@ const data = {
 
 
 function App() {
+    let [forceExpanded, setforceExpanded] =  useState(false);
+
     return (
         <div className="App">
-            <TreeComponent data={data}/>
+            <button onClick={() => {setforceExpanded(true)}}> Click </button>
+            <TreeComponent forceExpanded={forceExpanded} data={data}/>
         </div>
     );
 }
