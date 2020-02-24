@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {TreeContext} from "../context/TreeContext";
+import { v4 as uuid } from 'uuid';
+
 
 function TreeComponent(props) {
-
-    // const [id] = useState(uuid())
 
     const {subchildren, name } = props.data
     const depth = props.depth || 1
@@ -11,7 +11,6 @@ function TreeComponent(props) {
     let {componentStatus, forceAction} = useContext(TreeContext)
     let [expanded, setExpanded] = useState(false)
 
-    console.log(name , expanded)
     useEffect(() => {
         setExpanded(forceAction.payload)
     }, [forceAction.trigger])

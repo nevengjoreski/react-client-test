@@ -9,12 +9,11 @@ export const TreeProvider = (props) => {
     let [expandedStatus, setexpandedStatus] = useState(false);
     let [forceAction, setforceAction] = useState({trigger : false , payload : false});
 
-    // console.table(expandedStatus, forceAction)
-
+    
     const componentStatus = (id, data) => {
-        statuses.set(id, data)
 
-        // console.log(statuses)
+        console.log(statuses)
+        statuses.set(id, data)
         updateStatus()
     }
     
