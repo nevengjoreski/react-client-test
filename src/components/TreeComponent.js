@@ -1,16 +1,21 @@
 import React, {useEffect, useState} from 'react';
+import {v4 as uuid} from "uuid";
 
 function TreeComponent(props) {
 
     //state
     let [expanded, setExpanded] = useState(false)
+    // const [id] = useState(uuid())
+
     const children = props.data.children
     const name = props.data.name
     const depth = props.depth || 1
 
     //observers
     useEffect(() => {
-        setExpanded(props.forceExpanded)
+        if(props.forceExpanded.forced){
+            setExpanded(props.forceExpanded.value)
+        }
     }, [props.forceExpanded])
 
     useEffect(() => {
@@ -29,7 +34,7 @@ function TreeComponent(props) {
                 onClick={() => setExpanded(!expanded)}
             >
                 <div>
-                    <SymbolSpan expanded={expanded} children={children}/> {name}
+                    <SymbolSpan expanded={expanded} children={children} name={name}/>
                 </div>
             </div>
 
@@ -57,7 +62,7 @@ const SymbolSpan = (props) => {
     } else {
         symbol = '\u2802 '
     }
-    return <span> {symbol} </span>
+    return <span> {symbol} {props.name} </span>
 }
 
 export default TreeComponent;

@@ -69,29 +69,38 @@ const data = {
     ]
 }
 
+let statuses = new Map();
 
 function App() {
 
     let [forceExpanded, setforceExpanded] =  useState(false);
     let [expandedAll, setexpandedAll] =  useState(false);
-    let statuses = new Map();
 
-    const componentStatus = ( name, data ) => {
 
-        statuses.set(name , data)
+    const componentStatus = ( id, data ) => {
+
+        statuses.set(id , data)
+
+        console.log(statuses)
         // TODO not status by name , by uuid
         //will return 0 if all are expanded
-        if( ([...statuses.values()].filter((el) => el === false ).length ) === 0) {
-            setexpandedAll(true);
+        if( ([...statuses.values()].filter((element) => element === false ).length ) === 0) {
+            setexpandedAll(true)
         } else {
-            setexpandedAll(false);
+            setexpandedAll(false)
         }
 
     }
 
+    const forceAction = () => {
+        setforceExpanded({ forced : true, value : !expandedAll });
+    }
+
     return (
         <div className="App">
-            <button className="btn" onClick={() => {setforceExpanded(!forceExpanded)}}> { expandedAll ? 'Colapse All' : 'Expand All'} </button>
+            <button className="btn"
+                    onClick={forceAction}> { expandedAll ? 'Colapse All' : 'Expand All'}
+            </button>
             <TreeComponent
                 forceExpanded={forceExpanded}
                 data={data}
