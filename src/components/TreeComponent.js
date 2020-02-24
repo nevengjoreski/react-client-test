@@ -13,6 +13,14 @@ function TreeComponent(props) {
         setExpanded(props.forceExpanded)
     }, [props.forceExpanded])
 
+    useEffect(() => {
+        if ( children && children.length > 0){
+            props.componentStatus(name ,expanded)
+        } else {
+            props.componentStatus(name ,true)
+        }
+    }, [expanded])
+
     //render
     return (
         <div>
@@ -31,7 +39,8 @@ function TreeComponent(props) {
                 && expanded
                 && children.map((v, i) => {
                     return <TreeComponent depth={depth + 1} key={i} data={v}
-                        expanded={expanded} forceExpanded={props.forceExpanded}/>
+                        expanded={expanded} forceExpanded={props.forceExpanded}
+                        componentStatus={props.componentStatus}/>
                 })
             }
 
