@@ -73,15 +73,15 @@ let statuses = new Map();
 
 function App() {
 
-    let [forceExpanded, setforceExpanded] =  useState(false);
+    let [forceExpanded, setforceExpanded] =  useState({forced : false, value : false});
     let [expandedAll, setexpandedAll] =  useState(false);
 
-
+    console.log(1111111111111111)
     const componentStatus = ( id, data ) => {
 
         statuses.set(id , data)
 
-        console.log(statuses)
+        // console.log(statuses)
         // TODO not status by name , by uuid
         //will return 0 if all are expanded
         if( ([...statuses.values()].filter((element) => element === false ).length ) === 0) {
