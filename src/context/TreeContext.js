@@ -2,18 +2,22 @@ import React, {createContext, useState} from "react";
 
 export const TreeContext = createContext()
 
+
 export const TreeProvider = (props) => {
 
-    let statuses = new Map();
+    const [statuses] = useState(new Map())
+    let [expandedStatus, setexpandedStatus] = useState(false);
+    let [forceAction, setforceAction] = useState({trigger : false , payload : false});
 
-    let [forceAction, setforceAction] = useState(false);
-    let [expandedStatus, setexpandedStatus] = useState(true);
+    // console.table(expandedStatus, forceAction)
 
     const componentStatus = (id, data) => {
         statuses.set(id, data)
+
+        // console.log(statuses)
         updateStatus()
     }
-
+    
     const updateStatus =  () => {
 
         // steps . destruct statuses Map to array => get values => check if there is false status element => set expandedAll to true/false
@@ -24,7 +28,7 @@ export const TreeProvider = (props) => {
         }
     }
 
-    let [data] = useState({
+    const [data] = useState({
         name: '/root',
         subchildren: [
             {
@@ -92,7 +96,7 @@ export const TreeProvider = (props) => {
     })
 
     return (
-        <TreeContext.Provider value={{data, statuses, componentStatus, expandedStatus, setforceAction, forceAction}}>
+        <TreeContext.Provider value={{data, statuses, componentStatus, expandedStatus, forceAction, setforceAction}}>
             {props.children}
         </TreeContext.Provider>
     )

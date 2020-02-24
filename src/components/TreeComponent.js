@@ -1,23 +1,20 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {v4 as uuid} from "uuid";
 import {TreeContext} from "../context/TreeContext";
 
 function TreeComponent(props) {
 
-    //state
-    let [expanded, setExpanded] = useState(false)
     // const [id] = useState(uuid())
 
-    const subchildren = props.data.subchildren
-    const name = props.data.name
+    const {subchildren, name } = props.data
     const depth = props.depth || 1
 
-    let {componentStatus, forceAction, expandedStatus} = useContext(TreeContext)
+    let {componentStatus, forceAction} = useContext(TreeContext)
+    let [expanded, setExpanded] = useState(false)
 
-    //observers
+    console.log(name , expanded)
     useEffect(() => {
-        setExpanded(!expandedStatus)
-    }, [forceAction])
+        setExpanded(forceAction.payload)
+    }, [forceAction.trigger])
 
     useEffect(() => {
         if ( subchildren && subchildren.length > 0){
@@ -25,7 +22,7 @@ function TreeComponent(props) {
         } else {
             componentStatus(name ,true)
         }
-    }, [componentStatus, expanded, name, subchildren])
+    }, [expanded])
 
     //render
     return (
@@ -54,6 +51,7 @@ function TreeComponent(props) {
 
 
 const SymbolSpan = (props) => {
+
     let symbol
 
     if (props.subchildren) {

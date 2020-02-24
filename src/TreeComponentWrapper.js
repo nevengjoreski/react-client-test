@@ -5,12 +5,12 @@ import {TreeContext} from "./context/TreeContext";
 
 function TreeComponentWrapper() {
 
-    let {data, forceAction, setforceAction, expandedStatus} = useContext(TreeContext)
+    let {data, forceAction, setforceAction,  expandedStatus} = useContext(TreeContext)
 
     return (
             <div className="App">
                 <button className="btn"
-                    onClick={() => setforceAction(!forceAction)}> {expandedStatus ? 'Colapse All' : 'Expand All'}
+                    onClick={() => setforceAction({ trigger : !forceAction.trigger, payload : !expandedStatus})}> {expandedStatus ? 'Colapse All' : 'Expand All'}
                 </button>
                 <TreeComponent data={data} />
             </div>
