@@ -1,11 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {TreeContext} from "../context/TreeContext";
-import { v4 as uuid } from 'uuid';
-
 
 function TreeComponent(props) {
 
-    const {subchildren, name } = props.data
+    const {subchildren, name, id } = props.data
     const depth = props.depth || 1
 
     let {componentStatus, forceAction} = useContext(TreeContext)
@@ -17,9 +15,9 @@ function TreeComponent(props) {
 
     useEffect(() => {
         if ( subchildren && subchildren.length > 0){
-            componentStatus(name ,expanded)
+            componentStatus(id ,expanded)
         } else {
-            componentStatus(name ,true)
+            componentStatus(id ,true)
         }
     }, [expanded])
 
@@ -40,7 +38,7 @@ function TreeComponent(props) {
                 && subchildren.length > 0
                 && expanded
                 && subchildren.map((v, i) => {
-                    return <TreeComponent depth={depth + 1} key={i} data={v} />
+                    return <TreeComponent depth={depth + 1} key={v.id} data={v} />
                 })
             }
 
