@@ -13,7 +13,9 @@ function TreeComponentWrapper() {
                     onClick={() => setforceAction({ trigger : !forceAction.trigger, payload : !expandedStatus})}>
                     {expandedStatus ? 'Colapse All \u25BC' : 'Expand All \u2BC8'}
                 </button>
-                <TreeComponent data={data} />
+                <div className={"wrapper"}>
+                    <TreeComponent className="asd" data={data} />
+                </div>
             </div>
     );
 }

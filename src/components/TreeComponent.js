@@ -26,12 +26,12 @@ function TreeComponent(props) {
 
     //render
     return (
-        <div>
+        <div className={'treeComponent'}>
             <div className="node"
                 style={{marginLeft: depth * marginLeftSize}}
                 onClick={() => setExpanded(!expanded)}
             >
-                <div>
+                <div className={subchildren && subchildren.length > 0 ? 'directory' : 'file'}>
                     <SymbolSpan expanded={expanded} subchildren={subchildren} name={name}/>
                 </div>
             </div>
