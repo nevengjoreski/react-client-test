@@ -5,14 +5,17 @@ function TreeComponent(props) {
 
     const {subchildren, name, id } = props.data
     const depth = props.depth || 1
+    const marginLeftSize = 30
 
     let {componentStatus, forceAction} = useContext(TreeContext)
     let [expanded, setExpanded] = useState(false)
 
+    //this is triggered when button expand/colapse is clicked
     useEffect(() => {
         setExpanded(forceAction.payload)
     }, [forceAction.trigger])
 
+    //sets the component status to true / false expanded
     useEffect(() => {
         if ( subchildren && subchildren.length > 0){
             componentStatus(id ,expanded)
@@ -25,7 +28,7 @@ function TreeComponent(props) {
     return (
         <div>
             <div className="node"
-                style={{marginLeft: depth * 30}}
+                style={{marginLeft: depth * marginLeftSize}}
                 onClick={() => setExpanded(!expanded)}
             >
                 <div>
@@ -49,13 +52,12 @@ function TreeComponent(props) {
 
 const SymbolSpan = (props) => {
 
-    let symbol
+    let symbol = '\u2802 '
 
     if (props.subchildren) {
-        symbol = props.expanded ? '\u25BC' : '\u2BC8'
-    } else {
-        symbol = '\u2802 '
+        symbol = props.expanded ? '\u25BC ' : '\u2BC8 '
     }
+
     return <span> {symbol} {props.name} </span>
 }
 

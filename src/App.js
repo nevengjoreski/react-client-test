@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import {TreeProvider} from "./context/TreeContext"
-import TreeComponentWrapper from "./TreeComponentWrapper";
+import TreeComponentWrapper from "./components/TreeComponentWrapper";
 
 
 
