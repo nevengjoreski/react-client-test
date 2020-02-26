@@ -1,38 +1,40 @@
 .node {
-  text-align: left;
+    text-align: left;
+    cursor: pointer;
 }
 
 .btn {
-  color:white;
-  margin: 20px 30px;
-  padding: 5px;
-  box-shadow: 3px 2px #ffffff;
-  border-radius: 2px;
-  background: #333333;
-  outline: none;
+    color: white;
+    margin: 20px 30px;
+    padding: 5px;
+    box-shadow: 3px 2px #ffffff;
+    border-radius: 2px;
+    background: #333333;
+    outline: none;
+    cursor: pointer;
 }
 
-body{
-  background: #333;
-  color:white;
+body {
+    background: #333;
+    color: white;
 }
 
-.wrapper{
-  border: 1px solid white;
-  padding: 20px 20px;
-  margin: 20px 10px;
-  width: max-content;
+.wrapper {
+    border: 1px solid white;
+    padding: 20px 20px;
+    margin: 20px 10px;
+    width: max-content;
 
 }
 
-.treeComponent{
-  padding-right: 30px;
+.treeComponent {
+    padding-right: 30px;
 }
 
 .file {
-  background: #444444;
+    background: #444444;
 }
 
-.directory, .file{
-  padding: 3px 0;
+.directory, .file {
+    padding: 3px 0;
 }

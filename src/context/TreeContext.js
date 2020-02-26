@@ -1,5 +1,6 @@
 import React, {createContext, useState} from "react";
-import { v4 as uuid } from 'uuid';
+import {json_data} from "../assets/data.json";
+
 export const TreeContext = createContext()
 
 export const TreeProvider = (props) => {
@@ -7,91 +8,8 @@ export const TreeProvider = (props) => {
     // props
     const [statuses] = useState(new Map())
     let [expandedStatus, setexpandedStatus] = useState(false);
-    let [forceAction, setforceAction] = useState({trigger : false , payload : false});
-    const [data] = useState({
-        name: '/root',
-        id : uuid(),
-        subchildren: [
-            {
-                name: 'music',
-                id : uuid(),
-                subchildren: [
-                    {
-                        name: 'Bellyache.mp3',
-                        id : uuid(),
-                    },
-                    {
-                        name: 'Mamma Mia.mp3',
-                        id : uuid(),
-                    },
-                    {
-                        name: 'After Dark.mp3',
-                        id : uuid(),
-                    },
-                    {
-                        name: 'Two Steps From Hell',
-                        id : uuid(),
-                        subchildren: [
-                            {
-                                name: 'hero.mp3',
-                                id : uuid(),
-                            },
-                            {
-                                name: 'victory.mp3',
-                                id : uuid(),
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                name: 'movies',
-                id : uuid(),
-                subchildren: [
-                    {
-                        name: 'Lord Of The Rings.avi',
-                        id : uuid(),
-                    },
-                    {
-                        name: 'Mamma Mia.avi',
-                        id : uuid(),
-                    },
-                ]
-            },
-            {
-                name: 'series',
-                id : uuid(),
-                subchildren: [
-                    {
-                        name: 'Gossip Girl.avi',
-                        id : uuid(),
-                    },
-                    {
-                        name: 'Narcos.avi',
-                        id : uuid(),
-                    },
-                    {
-                        name: 'Game of Thrones.avi',
-                        id : uuid(),
-                    },
-                    {
-                        name: 'Favourites',
-                        id : uuid(),
-                        subchildren: [
-                            {
-                                name: 'Stranger Things.avi',
-                                id : uuid(),
-                            },
-                            {
-                                name: 'La Casa De Papel.avi',
-                                id : uuid(),
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    })
+    let [forceAction, setforceAction] = useState({trigger: false, payload: false});
+    const [data] = useState(json_data)
 
     //methods
     const componentStatus = (id, data) => {
@@ -99,16 +17,17 @@ export const TreeProvider = (props) => {
         statuses.set(id, data)
         updateStatus()
     }
-    
-    const updateStatus =  () => {
+
+    const updateStatus = () => {
 
         // steps . destruct statuses Map to array => get values => check if there is false status element => set expandedAll to true/false
         if (([...statuses.values()].filter((element) => element === false).length) === 0) {
-            setexpandedStatus(true)
 
+            setexpandedStatus(true)
             //forces colapse when root is clicked
             setforceAction({...forceAction, payload: false})
         } else {
+
             setexpandedStatus(false)
         }
     }

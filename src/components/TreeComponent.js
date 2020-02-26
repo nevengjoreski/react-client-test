@@ -3,7 +3,7 @@ import {TreeContext} from "../context/TreeContext";
 
 function TreeComponent(props) {
 
-    const {subchildren, name, id } = props.data
+    const {subchildren, name, id} = props.data
     const depth = props.depth || 1
     const marginLeftSize = 30
 
@@ -17,10 +17,10 @@ function TreeComponent(props) {
 
     //sets the component status to true / false expanded
     useEffect(() => {
-        if ( subchildren && subchildren.length > 0){
-            componentStatus(id ,expanded)
+        if (subchildren && subchildren.length > 0) {
+            componentStatus(id, expanded)
         } else {
-            componentStatus(id ,true)
+            componentStatus(id, true)
         }
     }, [expanded])
 
@@ -40,8 +40,8 @@ function TreeComponent(props) {
                 subchildren
                 && subchildren.length > 0
                 && expanded
-                && subchildren.map((v, i) => {
-                    return <TreeComponent depth={depth + 1} key={v.id} data={v} />
+                && subchildren.map((v) => {
+                    return <TreeComponent depth={depth + 1} key={v.id} data={v}/>
                 })
             }
 

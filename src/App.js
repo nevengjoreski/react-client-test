@@ -4,13 +4,10 @@ import {TreeProvider} from "./context/TreeContext"
 import TreeComponentWrapper from "./components/TreeComponentWrapper";
 
 
-
 function App() {
 
-    return(
-        <TreeProvider>
-            <TreeComponentWrapper />
-        </TreeProvider>
+    return (
+        <TreeProvider> <TreeComponentWrapper/> </TreeProvider>
     )
 }
 
